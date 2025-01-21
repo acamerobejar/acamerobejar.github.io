@@ -1,0 +1,36 @@
+#dfsMessage {
+  padding-top: .9vw;
+  padding-right: 4vw;
+  font-size: 1.2vw;
+  text-align: right;
+}
+/* https://stackoverflow.com/questions/2570972/css-font-border */
+.shadowText {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  /*font-size: 1vw;*/
+  font-weight: bold;
+  /*font-family: verdana;*/
+}
+.notVisited {
+  color: white;
+  font-weight: bold;
+}
+.visited {
+  /*color: royalblue;*/
+  color: gray;
+  font-weight: bold;
+}
+.current {
+  color: orange;
+  font-weight: bold;
+}
+.finished {
+  /*color: firebrick;*/
+  color: black;
+  font-weight: bold;
+}
+.rejected {
+  /*color: mistyrose;*/
+  color: white;
+  font-weight: bold;
+}

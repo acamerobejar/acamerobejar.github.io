@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/template_2canvases.css">
+    <link rel="stylesheet" href="css/dfs_messages.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/dropdown.css">
+    <link rel="stylesheet" href="css/tooltip.css">
+    <script src="js/Handlers/menu_listeners.js"></script>
+    <script>
+      var normalCols = "2% 47.2% auto";
+      var leftStretchCols = "20% 38% auto";
+      var rightStretchCols = "2% 38% auto";
+    </script>
+    <title>Marked Quotient Graph</title>
+  </head>
+  
+  <body>
+    <div id="app-content">
+    
+      <!-- HEADER -->
+      <div id="body-header" class="header">
+        <div id="dfsMessage"></div>
+      </div>
+    
+      <div id="body-contents">
+        <div id="leftMenu">
+          <div class="arrow-right"></div>
+          <div id="leftMenuContents" class="invisible">
+            <!-- CANVAS CONTROLS -->
+            <p id="instructions">Select a program state:</p>
+            <!-- State Selection Radio Buttons -->
+            <div class="radio-bar">
+              <input type="radio" id="state1" name="state" value="origin" checked>
+              <label for="state1">Origin</label> 
+              
+              <input type="radio" id="state2" name="state" value="axes">
+              <label for="state2">Axes</label> 
+              
+              <br><br>
+            
+              <input type="radio" id="state3" name="state" value="vertex">
+              <label for="state3">Vertex</label> 
+            
+              <input type="radio" id="state4" name="state" value="edge">
+              <label for="state4">Edge</label>
+              
+              <br><br>
+            
+              <input type="radio" id="state5" name="state" value="marker">
+              <label for="state5">Marker</label>
+              
+              <input type="radio" id="state6" name="state" value="fragment">
+              <label for="state6">Fragment</label> 
+            </div>
+            <hr>
+            <input type="checkbox" class="styledCheckbox" id="showVertices" checked>
+            <label for="showVertices">Show Vertices</label> <br>
+            <input type="checkbox" class="styledCheckbox" id="showVertexIds" checked>
+            <label for="showVertexIds">Show Vertex Ids</label> <br>
+            <input type="checkbox" class="styledCheckbox" id="showEdges" checked>
+            <label for="showEdges">Show Edges</label> <br>
+            <input type="checkbox" class="styledCheckbox" id="showEdgeLabels" checked>
+            <label for="showEdgeLabels">Show Markers</label>  <br>
+            <input type="checkbox" class="styledCheckbox" id="showOrigin" checked>
+            <label for="showOrigin">Show Origin</label> <br>
+            <input type="checkbox" class="styledCheckbox" id="showAxes" checked>
+            <label for="showAxes">Show Axes</label> <br>
+            <input type="checkbox" class="styledCheckbox" id="showUC" checked>
+            <label for="showUC">Show Unit Cell</label>
+            <br> <hr> <br>
+            <button id="clearBtn" class="redButton centered-horizontal">Clear Graphs</button> 
+
+          </div>
+        </div>
+        <div id="container-left" class="canvas-window">
+          <canvas id="canvas-left"></canvas>
+        </div>
+      
+        <div id="container-right" class="canvas-window">
+          <canvas id="canvas-right"></canvas>
+        </div>
+      </div>
+      
+      <div id="bottomMenu">
+        <div class="arrow-up"></div>
+        <div id="bottomMenuContents" class="invisible">
+          <div class="buttonRow4">
+            <a href="../../">
+              <button class="ioButton" onclick="">Other Apps</button>
+            </a>
+          
+            <div>
+              <input type="file" id="uploadFile" onchange="uploadSQGraph(CTX_L, left_g, multiEDict_left, document.getElementById('uploadFile'))" accept=".gmqg" hidden>
+              <button class="ioButton" onclick="document.getElementById('uploadFile').click()">Upload Marked Quotient Graph (.gmqg)</button>
+            </div>
+            
+            
+            <label class="dropdown">
+              <div class="dd-button">Download (.gmqg)</div>
+              <input type="checkbox" class="dd-input" id="download">
+              <ul class="dd-menu">
+                <li><a  onclick="downloadGraph(left_g)">Download Marked Quotient Graph (Left)</a></li>
+                <li class="divider"></li>
+                <li><a  onclick="downloadGraph(right_g)">Download Periodic Fargment (Right)</a></li>
+              </ul>
+            </label>
+            
+            
+            <div>
+              Graph Name: <input id="downloadTitle" type="text" placeholder="Untilted">
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2></h2>
+      </div>
+      <div class="modal-body">
+        <img src="images/linkage_logo_animated.gif" alt="Linkage Lab">
+      </div>
+      <div class="modal-footer">
+        <p style="text-align:center" class="title">Marked Quotient Graph to Simple Periodic Graph Visualizer </p>
+      </div>
+    </div>
+
+</div>
+    
+    <!-- Imports -->
+    <script src="js/Classes/Coordinates/coordinate.js"></script>
+    <script src="js/Classes/Coordinates/geomVertex.js"></script>
+    <script src="js/Classes/Coordinates/marker.js"></script>
+    <script src="js/Classes/Coordinates/markedVertex.js"></script>
+    <script src="js/Classes/Edges/uedge.js"></script>
+    <script src="js/Classes/Edges/dedge.js"></script>
+    <script src="js/Classes/Edges/medge.js"></script>
+    <script src="js/Classes/Edges/pedge.js"></script>
+    <script src="js/Classes/FragmentSize/fragmentSize.js"></script>
+    <script src="js/Classes/EdgeList/graphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/multiUndirectedGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/quotientGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/markedQuotientGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/simpleGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/simpleDirectedGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/simpleMarkedQuotientGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/PeriodicGraphEdgeList.js"></script>
+    <script src="js/Classes/EdgeList/FragmentGraphEdgeList.js"></script>
+    <script src="js/Other/colors.js"></script>
+    <script src="js/Other/math_helpers.js"></script>
+    <script src="js/Other/multiEDict_helpers.js"></script>
+    <script src="js/Other/coordinate_helpers.js"></script>
+    <script src="js/Global/graphics_constants.js"></script>
+    <script src="js/Global/program_globals.js"></script>
+    <script src="js/Global/font_constants.js"></script>
+    <script src="js/Handlers/clear.js"></script>
+    <script src="js/Graphics/graphics_helpers.js"></script>
+    <script src="js/Graphics/graphics.js"></script>
+    <script src="js/Handlers/change_marker.js"></script>
+    <script src="js/Other/event_helpers.js"></script>
+    <script src="js/Handlers/events.js"></script>
+    <script src="js/IO/io.js"></script>
+    <script src="js/Handlers/set_listeners.js"></script>
+    <script src="js/Other/move_scrollbar.js"></script>
+    <script src="js/Other/rightGraph_helpers.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/Handlers/modal.js"></script>
+
+  </body>
+</html>

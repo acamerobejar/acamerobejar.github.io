@@ -1,0 +1,330 @@
+/* ============================================= */
+/* ================== PALETTE ================== */
+/* ============================================= */
+:root{
+  /* Colors from Alexandra's graph viewer */
+  --color1: rgb(192, 56, 43);/*custom lighter firebrick*/
+  --color2: rgb(82, 109, 130);/*custom blue-gray*/
+  --color3: rgb(255, 255, 224);/*lightyellow*/
+  --color4: rgb(188, 205, 228);/*custom lighter lightsteelblue*/
+  --color5: rgb(75,75,75);/*custom dark gray*/
+  --color6: rgb(176, 196, 222);/*lightsteelblue*/
+  --color7: rgb(60, 179, 113);/*mediumseagreen*/
+  --color8: rgb(108, 117, 124);/*custom blue dark gray*/
+  --color9: rgb(245, 245, 245);/*whitesmoke*/
+  --color10: rgb(240, 245, 250);/*custom light blue*/
+  --color11: black;/*black*/
+}
+/* ========================================== */
+/* ================== MAIN ================== */
+/* ========================================== */
+body {
+  font-family: Verdana;
+  background-color: var(--color9);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 1vw; 
+  overflow: hidden;
+}
+#app-content {
+  visibility: hidden; /* hidden until intro modal is closed */
+}
+#body-header{
+  height: 3vw;
+}
+#body-contents{
+  display: grid;
+  grid-template-columns: 2% 47.2% auto;
+  /* grid-template-columns: 2% 47% 47% auto;*/
+  gap: 0.5%;
+  height: 87vh;/*sets the heights of the left/right menus and the canvas*/
+  box-sizing: border-box;
+}
+#instructions {
+  font-size: 1.2vw;
+}
+/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd */
+kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+    color: #333;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+.header{
+  /*display: grid;
+  grid-template-columns: 44% auto 43%;
+  box-sizing: border-box;*/
+  margin-bottom: 0.5vh;
+}
+.title{
+  font-size: 3vw;
+  color: var(--color2);
+  box-sizing: border-box;
+}
+.always-visible-data{
+  color: var(--color2);
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 1.2vw;
+  box-sizing: border-box;
+}
+
+/* Disabled checkboxes */
+/*input.styledCheckbox[type="checkbox"]+ label {font-size: 1.25vw;}
+input.styledCheckbox[type="checkbox"]:disabled + label  {color:lightgray;}*/
+
+/* ============================================ */
+/* ================== CANVAS ================== */
+/* ============================================ */
+
+canvas{
+  background-color: white;
+  width: 100%;
+  height: 87vh;
+}
+/* new style */
+.canvas-window{
+  border: 0.5px solid var(--color5);
+  box-sizing: border-box;
+  /*overflow: hidden;*/
+  overflow: scroll;
+  position: relative;
+}
+/* =========================================== */
+/* ================== MENUS ================== */
+/* =========================================== */
+/* Got rid of the whole menus' padding because it affected the page's flexing 
+-> individual elements inside the menu can still have padding though */
+#leftMenu, #rightMenu{
+  background-color: var(--color10);
+  border: 0.5px solid var(--color8);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#leftMenuContents, #rightMenuContents { 
+  padding: 1vw; 
+}
+#bottomMenuContents {
+  margin-top: 1vh;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  font-size: 1.2vw;
+}
+#bottomMenu{
+  background-color: var(--color10);
+  border: 0.5px solid var(--color8);
+  width: 100%;
+  margin-top: 1vh;
+  aspect-ratio: 16 / 9;
+  box-sizing: border-box;
+  position: relative;
+  padding: 8px; /* padding was not an issue for the bottom menu - only for left and right - so it stays */
+}
+/* arrows: https://css-tricks.com/snippets/css/css-triangle/ */
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  
+  border-bottom: 5px solid var(--color2);
+  position: relative;
+  margin: auto;
+  top: calc(0% - 13px);
+}
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  
+  border-left: 5px solid var(--color2);
+  position: relative;
+  top: 50%;
+  left: calc(100% + 0px);
+}
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent; 
+  
+  border-right: 5px solid var(--color2);
+  position: relative;
+  top: 50%;
+  left: calc(0% - 5px);
+  /* left: 0px; */
+}
+.invisible{
+  display: none;
+}
+/* ============================================= */
+/* ================== BUTTONS ================== */
+/* ============================================= */
+
+button{
+  background-color: var(--color4);
+  color: var(--color2);
+  border: 0.5px solid var(--color2);
+  border-radius: 10px;
+  /*width: 80%;*/
+}
+button:hover{
+  background-color: var(--color6);
+  cursor: pointer;
+}
+.redButton{ 
+  font-size: 1.2vw;
+  background-color: var(--color9);
+  color: var(--color1); 
+  border: 0.5px solid var(--color5);
+}
+.redButton:hover{
+  background-color: var(--color1);
+  color: var(--color9); 
+  cursor: pointer;
+}
+
+.blueButton{ 
+  background-color: var(--color9);
+  color: var(--color2); 
+  border: 0.5px solid var(--color5);
+  transition: 0.1s; 
+}
+.blueButton:hover{
+  background-color: var(--color2);
+  color: var(--color9); 
+  cursor: pointer;
+}
+.lightBlueButton{ 
+  display: inline-block; 
+  padding: 5px 20px; 
+  font-size: 1.2vw;
+  background-color: var(--color4);
+  color: var(--color2);
+  border:  0.5px solid var(--color2);
+  border-radius: 20px; 
+  cursor: pointer;  
+  transition: 0.1s; 
+}
+.lightBlueButton:hover{
+  background-color: var(--color2);
+  color: var(--color9);
+  cursor: pointer;
+}
+.ioButton{
+  width: 100%;
+  font-size: 1.2vw;
+  background-color: var(--color2);
+  color: var(--color9); 
+  border: 0.5px solid var(--color2);
+  border-radius: 1.5vw;
+  padding: 2vh 2vw 2vh 2vw;
+}
+.ioButton:hover{
+  /*height:100%;*/
+  background-color: var(--color4);
+  color: var(--color2); 
+  cursor: pointer;
+  /*width: 30%;*/
+}
+.buttonRow4{
+  display: grid;
+  grid-template-columns: 20% auto auto auto;
+  grid-gap: .8vw;
+}
+.buttonRow2{
+  display: grid;
+  grid-template-columns: auto 49.5%;
+  grid-gap: .8vw;
+}
+/* ============================================ */
+/* ================== RADIOS ================== */
+/* ============================================ */
+.radio-bar { 
+  margin: 5px; 
+  overflow: hidden; 
+}
+.radio-bar input { 
+  opacity: 0; 
+  position: fixed; 
+  width: 0; 
+}
+.radio-bar label { 
+  display: inline-block; 
+  padding: 5px 20px; 
+  font-size: 1.2vw;
+  color: var(--color2);
+  background-color: var(--color4);
+  cursor: pointer; 
+  border:  0.5px solid var(--color2); 
+  border-radius: 20px; 
+  transition: 0.1s; 
+}
+.radio-bar label:hover { 
+  background-color: var(--color10);
+}
+.radio-bar input:focus + label { 
+  background-color: var(--color2);
+  color: var(--color9); 
+}
+.radio-bar input:checked + label { 
+  background-color: var(--color2);
+  color: var(--color9)
+}
+/* =========================================== */
+/* ================== OTHER ================== */
+/* =========================================== */
+input[type=text]{
+  width: 100%;
+}
+
+.centered{
+  display: block;
+  margin: auto;
+}
+.centered-horizontal {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.img_logo{
+  cursor: pointer;
+}
+
+.content-text{
+  font-family: verdana;
+  color: var(--color2);
+}
+
+select{
+  position: relative;
+  outline: 0;
+  background-color: transparent;
+  background-image: none;
+  width: 80%;
+  padding: 4px;
+  color: var(--color2);
+  font-size: 11px;
+  cursor: pointer;
+  border: 0.5px solid var(--color2);
+  border-radius: 5px;
+}
+.debugging-text {
+    font-size: 1vw;
+    font-weight: bold;
+}
+.disabledText { 
+  color: gray; 
+}
