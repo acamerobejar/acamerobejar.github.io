@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <!-- Link to the latest Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="./Shared_Libraries/External/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 50px;
+    }
+    .welcome-text {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .link-btn {
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .link-btn:hover {
+      transform: scale(1.1);
+    }
+    .btn-custom {
+      background-color: #5A8DC4;  /* Custom background color */
+      color: white;               /* Text color */
+    }
+    /* Hover effect for the button */
+    .btn-custom:hover {
+      background-color: #4076B0;  /* Darker background on hover */
+      border-color: #4a90e2;      /* Lighter border on hover */
+      color: white;                /* Maintain text color */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header with welcome message -->
+    <div class="welcome-text">
+      <h1>Periodic Graphs</h1>
+      <p class="lead">Please select an app by clicking one of the links below</p>
+    </div>
+
+    <!-- Links as buttons in a row -->
+    <div class="row justify-content-center">
+      <div class="col-md-3 mb-4">
+        <a href="./pergraph_classes_revamped" class="btn btn-custom link-btn w-100">Generate Graphs</a>
+      </div>
+
+      <!-- Link 2 (Dropdown Button) -->
+      <div class="col-md-3 mb-4">
+        <div class="dropdown">
+          <button class="btn btn-custom link-btn w-100 dropdown-toggle" type="button" id="comparisonOptions" data-bs-toggle="dropdown" aria-expanded="false">
+            Compare Graphs
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="comparisonOptions">
+            <li><a class="dropdown-item" href="./Pipeline">Comprehensive Step-by-Step</a></li>
+            <li><a class="dropdown-item" href="./Short_Pipeline">Focused Comparison</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Link 3 (Dropdown Button) -->
+      <div class="col-md-3 mb-4">
+        <div class="dropdown">
+          <button class="btn btn-custom link-btn w-100 dropdown-toggle" type="button" id="otherOptions" data-bs-toggle="dropdown" aria-expanded="false">
+            Short Tests
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="otherOptions">
+            <li><a class="dropdown-item" href="./Tools/html/exchange_axes.html">Flip Graph Axes</a></li>
+            <li><a class="dropdown-item" href="./Tools/html/rotate_graph.html">Rotate Graph based on Lattice System</a></li>
+            <li><a class="dropdown-item" href="./Tools/html/translate_to_origin.html">Translate Graph Vertex to Origin</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Link to Bootstrap JS bundle -->
+  <script src="./Shared_Libraries/External/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
